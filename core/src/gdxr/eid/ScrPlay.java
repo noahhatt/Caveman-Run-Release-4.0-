@@ -10,13 +10,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class ScrPlay implements Screen {
 
-    Game game;
+    GdxGame game;
+    Button btnMenu;
     SpriteBatch batch;
     OrthographicCamera oc;
     Hero Hero1;
     float fFallSpeed = 0;
 
-    public ScrPlay(Game game) {
+    public ScrPlay(GdxGame game) {
         this.game = game;
     }
 
@@ -26,17 +27,37 @@ public class ScrPlay implements Screen {
         oc.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         oc.update();
         batch = new SpriteBatch();
-       // Hero1 = new Hero(Gdx.graphics.getWidth() / 4 - 50f, Gdx.graphics.getHeight() / 2 + 100, 100f, 100f);
-
+        btnMenu = new Button(590,0,50,40,"menu.png");
+        Hero1 = new Hero(Gdx.graphics.getWidth() / 4 - 50f, Gdx.graphics.getHeight() / 2 + 100, 100f, 100f);
     }
+        private void changeScreen() {
+        
+         if (Gdx.input.isKeyPressed(Input.Keys.M)) {
+             game.updateState(0);
+             
+        }
+          if (Gdx.input.isKeyPressed(Input.Keys.C)) {
+             game.updateState(2);
+             
+        }
+          if (Gdx.input.justTouched()) {               
+        
+         if (btnMenu.isMousedOver()) {
+           game.updateState(0);     
+         }
+        }
+    }
+    
 
     @Override
     public void render(float f) {
+             changeScreen();
         Gdx.gl.glClearColor(1, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         batch.begin();
         batch.setProjectionMatrix(oc.combined);
         Hero1.draw(batch);
+        btnMenu.draw(batch);
         batch.end();
         KeyPressed();
         

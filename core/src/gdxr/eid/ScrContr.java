@@ -45,12 +45,10 @@ public class ScrContr implements Screen {
         }
           if (Gdx.input.justTouched()) {
           if (btnPlay.isMousedOver()) {
-           System.out.println("play");
-          game.setScreen(new ScrPlay(game));          
+          game.updateState(1);      
         }
          if (btnMenu.isMousedOver()) {
-           System.out.println("Menu");
-          game.setScreen(new ScrMenu(game));          
+           game.updateState(0);        
         }
     }
     }
