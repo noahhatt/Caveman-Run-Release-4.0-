@@ -54,7 +54,7 @@ public class ScrContr implements Screen {
         }
     }
     }
-
+//change
     @Override
     public void render(float f) {
         changeScreen();
