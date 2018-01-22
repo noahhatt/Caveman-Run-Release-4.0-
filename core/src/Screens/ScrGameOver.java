@@ -38,7 +38,7 @@ public class ScrGameOver implements Screen {
         oc.update();
         batch = new SpriteBatch();
         btnMenu = new Button(590, 0, 50, 40, "menu.png");
-        btnRetry = new Button(Gdx.graphics.getWidth() / 2 - 75, Gdx.graphics.getHeight() / 4, 150, 100, "retry.png");
+        btnRetry = new Button(Gdx.graphics.getWidth() / 2 - 75, Gdx.graphics.getHeight() / 4, 150, 150, "retry.png");
 
     }
 
