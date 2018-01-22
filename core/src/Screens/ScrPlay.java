@@ -18,7 +18,6 @@ public class ScrPlay implements Screen {
     Button btnMenu;
     SpriteBatch batch;
     boolean Hit;
-    
     OrthographicCamera oc;
     Hero Hero1;
     Rock Rock;
@@ -38,7 +37,7 @@ public class ScrPlay implements Screen {
         batch = new SpriteBatch();
         btnMenu = new Button(590, 0, 50, 40, "menu.png");
         Rock = new Rock(Gdx.graphics.getWidth() / 4 + 500f, Gdx.graphics.getHeight() / 2 + 100, 100f, 100f);
-        Hero1 = new Hero(Gdx.graphics.getWidth() / 4 - 50f, Gdx.graphics.getHeight() / 2 + 100, 100f, 100f);
+        Hero1 = new Hero(Gdx.graphics.getWidth() / 4 - 50f, Gdx.graphics.getHeight() / 2 + 120, 75f, 75f);
     }
 
     private void changeScreen() {
@@ -83,14 +82,17 @@ public class ScrPlay implements Screen {
 //        Rock.setX(Rock.getX() - 4);
 //        if (Rock.getX() <= -200) {
 //            Rock.setX(nRstart);
-    //    }
+        //    }
         Hit = isHit(Hero1, Rock);
-        if(Hit == false){
+        if (Hit == true) {
+            System.out.println("Hit Rock");
+            game.updateState(3);
+        } else {
+            System.out.println("Running");
             Rock.setX(Rock.getX() - 6);
-        if (Rock.getX() <= -200) {
-            Rock.setX(nRstart);
-        }
-
+            if (Rock.getX() <= -200) {
+                Rock.setX(nRstart);                
+            }
         }
     }
 
@@ -103,14 +105,14 @@ public class ScrPlay implements Screen {
         }
     }
     //Kieren's awesome code
+
     public boolean isHit(Hero Hero1, Rock Rock) {
-       if(Hero1.getBoundingRectangle().overlaps(Rock.getBoundingRectangle())){
-           return true;
-       }
-           return false;
-       
+        if (Hero1.getBoundingRectangle().overlaps(Rock.getBoundingRectangle())) {
+            return true;
+        } else {
+            return false;
+        }
     }
-   
 
     @Override
     public void resize(int i, int i1) {

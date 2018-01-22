@@ -1,4 +1,3 @@
-
 package Screens;
 
 import Screens.GdxGame;
@@ -17,17 +16,18 @@ import Objects.Button;
  * @author johnr5818
  */
 // screen 0 is menu and 1 is play
-public class ScrMenu implements Screen {
+public class ScrGameOver implements Screen {
+
     Texture txtBack;
     GdxGame game;
-    Button btnPlay;
-    Button btnContr;
+    Button btnRetry;
+    Button btnMenu;
     SpriteBatch batch;
     OrthographicCamera oc;
 
-    public ScrMenu(GdxGame game) {
+    public ScrGameOver(GdxGame game) {
         this.game = game;
-        
+
     }
 
     @Override
@@ -37,37 +37,37 @@ public class ScrMenu implements Screen {
         oc.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         oc.update();
         batch = new SpriteBatch();
-        btnPlay = new Button(Gdx.graphics.getWidth() / 2 - 75,Gdx.graphics.getHeight() / 4,150,100,"playword.psd");
-        btnContr = new Button(Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight() / 2 + 100, 100, 80, "Contr.jpg");
+        btnMenu = new Button(590, 0, 50, 40, "menu.png");
+        btnRetry = new Button(Gdx.graphics.getWidth() / 2 - 75, Gdx.graphics.getHeight() / 4, 150, 100, "retry.png");
 
     }
 
     private void changeScreen() {
         if (Gdx.input.isKeyPressed(Input.Keys.P)) {
-             game.updateState(1);
+            game.updateState(1);
         } else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-             game.updateState(2);
+            game.updateState(2);
         }
         if (Gdx.input.justTouched()) {
-            if (btnPlay.isMousedOver()) {
-                   game.updateState(1);
+            if (btnMenu.isMousedOver()) {
+                game.updateState(0);
             }
-            if (btnContr.isMousedOver()) {
-               game.updateState(2);
+            if (btnRetry.isMousedOver()) {
+                game.updateState(1);
             }
         }
     }
 
     @Override
     public void render(float f) {
-        Gdx.gl.glClearColor(0.25f, 0.25f, 1.5f, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         changeScreen();
         batch.begin();
         batch.setProjectionMatrix(oc.combined);
-        btnContr.draw(batch);
-        btnPlay.draw(batch);
-       
+        btnMenu.draw(batch);
+        btnRetry.draw(batch);
+
         batch.end();
 
     }
