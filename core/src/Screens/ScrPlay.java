@@ -17,6 +17,8 @@ public class ScrPlay implements Screen {
     GdxGame game;
     Button btnMenu;
     SpriteBatch batch;
+    boolean Hit;
+    
     OrthographicCamera oc;
     Hero Hero1;
     Rock Rock;
@@ -78,12 +80,18 @@ public class ScrPlay implements Screen {
             Hero1.setY(Hero1.getY() + fFallSpeed);
         }
 
-        Rock.setX(Rock.getX() - 4);
+//        Rock.setX(Rock.getX() - 4);
+//        if (Rock.getX() <= -200) {
+//            Rock.setX(nRstart);
+    //    }
+        Hit = isHit(Hero1, Rock);
+        if(Hit == false){
+            Rock.setX(Rock.getX() - 6);
         if (Rock.getX() <= -200) {
             Rock.setX(nRstart);
         }
 
-
+        }
     }
 
     public void KeyPressed() {
@@ -93,6 +101,14 @@ public class ScrPlay implements Screen {
                 Hero1.setY(Hero1.getY() + fFallSpeed);
             }
         }
+    }
+    //Kieren's awesome code
+    public boolean isHit(Hero Hero1, Rock Rock) {
+       if(Hero1.getBoundingRectangle().overlaps(Rock.getBoundingRectangle())){
+           return true;
+       }
+           return false;
+       
     }
    
 

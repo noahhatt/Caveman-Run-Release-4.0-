@@ -1,4 +1,4 @@
-package gdxr.eid;
+package Screens;
 
 import com.badlogic.gdx.Game;
 
