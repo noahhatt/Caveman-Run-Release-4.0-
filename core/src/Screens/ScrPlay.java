@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import Objects.Button;
 import Objects.Hero;
 import Objects.Rock;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import java.util.Random;
 
@@ -21,6 +22,8 @@ public class ScrPlay implements Screen {
     OrthographicCamera oc;
     Hero Hero1;
     Rock Rock;
+    Texture txBack;
+    Sprite sprBack;
     Random rand = new Random();
     float fRockx;
     float fFallSpeed = 0;
@@ -39,6 +42,10 @@ public class ScrPlay implements Screen {
         btnMenu = new Button(590, 0, 50, 40, "menu.png");
         Rock = new Rock(Gdx.graphics.getWidth() / 4 + 500f, Gdx.graphics.getHeight() / 2 + 100, 100f, 100f);
         Hero1 = new Hero(Gdx.graphics.getWidth() / 4 - 50f, Gdx.graphics.getHeight() / 2 + 120, 75f, 75f);
+        txBack = new Texture("background.jpg");
+        sprBack = new Sprite(txBack);
+        sprBack.setFlip(false, true);
+        sprBack.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     private void changeScreen() {
@@ -53,9 +60,10 @@ public class ScrPlay implements Screen {
     @Override
     public void render(float f) {
         changeScreen();
-        Gdx.gl.glClearColor(1, 0, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        //Gdx.gl.glClearColor(1, 0, 1, 1);
+       // Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         batch.begin();
+        sprBack.draw(batch);
         batch.setProjectionMatrix(oc.combined);
         Hero1.draw(batch);
         Rock.draw(batch);
@@ -71,10 +79,8 @@ public class ScrPlay implements Screen {
         }
         Hit = isHit(Hero1, Rock);
         if (Hit == true) {
-            System.out.println("Hit Rock");
             game.updateState(3);
         } else {
-            System.out.println("Running");
             Rock.setX(Rock.getX() - 6);
             fRockx = Rock.getX();           
         if (fRockx <= -200) {
