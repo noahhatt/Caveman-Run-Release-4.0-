@@ -22,8 +22,9 @@ public class ScrPlay implements Screen {
     Hero Hero1;
     Rock Rock;
     Random rand = new Random();
-    int nRstart = rand.nextInt(700) + 500;
+    float fRockx;
     float fFallSpeed = 0;
+    int nRstart = rand.nextInt(500) + 700;
 
     public ScrPlay(GdxGame game) {
         this.game = game;
@@ -41,15 +42,6 @@ public class ScrPlay implements Screen {
     }
 
     private void changeScreen() {
-
-        if (Gdx.input.isKeyPressed(Input.Keys.M)) {
-            game.updateState(0);
-
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-            game.updateState(2);
-
-        }
         if (Gdx.input.justTouched()) {
 
             if (btnMenu.isMousedOver()) {
@@ -70,7 +62,6 @@ public class ScrPlay implements Screen {
         btnMenu.draw(batch);
         batch.end();
         KeyPressed();
-
         if (Hero1.getY() >= Gdx.graphics.getHeight() / 2 + 100) {
             fFallSpeed = 0;
         }
@@ -78,11 +69,6 @@ public class ScrPlay implements Screen {
             fFallSpeed = fFallSpeed + 0.35f;
             Hero1.setY(Hero1.getY() + fFallSpeed);
         }
-
-//        Rock.setX(Rock.getX() - 4);
-//        if (Rock.getX() <= -200) {
-//            Rock.setX(nRstart);
-        //    }
         Hit = isHit(Hero1, Rock);
         if (Hit == true) {
             System.out.println("Hit Rock");
@@ -90,15 +76,18 @@ public class ScrPlay implements Screen {
         } else {
             System.out.println("Running");
             Rock.setX(Rock.getX() - 6);
-            if (Rock.getX() <= -200) {
-                Rock.setX(nRstart);                
-            }
+            fRockx = Rock.getX();           
+        if (fRockx <= -200) {
+            Random rand = new Random();    
+            nRstart = rand.nextInt(500) + 700;
+            Rock.setX(nRstart);
+        }
         }
     }
 
     public void KeyPressed() {
         if (Hero1.getY() >= Gdx.graphics.getHeight() / 2 + 100) {
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.UP)) || (Gdx.input.isKeyPressed(Input.Keys.SPACE))) {
                 fFallSpeed = -10;
                 Hero1.setY(Hero1.getY() + fFallSpeed);
             }

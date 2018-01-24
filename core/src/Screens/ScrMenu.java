@@ -42,12 +42,7 @@ public class ScrMenu implements Screen {
 
     }
 
-    private void changeScreen() {
-        if (Gdx.input.isKeyPressed(Input.Keys.P)) {
-             game.updateState(1);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-             game.updateState(2);
-        }
+    private void changeScreen() { 
         if (Gdx.input.justTouched()) {
             if (btnPlay.isMousedOver()) {
                    game.updateState(1);

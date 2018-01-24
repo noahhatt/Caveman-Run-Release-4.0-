@@ -36,15 +36,7 @@ public class ScrContr implements Screen {
         btnMenu = new Button(590,0,50,40,"menu.png");
     }
 
-    private void changeScreen() {
-        if (Gdx.input.isKeyPressed(Input.Keys.P)) {
-            game.updateState(1);
-          
-        }
-         if (Gdx.input.isKeyPressed(Input.Keys.M)) {
-             game.updateState(0);
-             
-        }
+    private void changeScreen() {       
           if (Gdx.input.justTouched()) {
           if (btnPlay.isMousedOver()) {
           game.updateState(1);      
